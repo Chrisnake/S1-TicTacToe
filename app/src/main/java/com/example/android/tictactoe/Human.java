@@ -16,7 +16,6 @@ import java.util.Arrays;
 public class Human extends AppCompatActivity
 {
     private ArrayList<Integer> moveList = new ArrayList<Integer>();
-
     private int Board[] = {7, 7, 7, 7, 7, 7, 7, 7, 7};
 
     @Override
@@ -116,6 +115,15 @@ public class Human extends AppCompatActivity
                 Move(B9, position);
             }
         });
+
+        final Button Reset = findViewById(R.id.Reset);
+        Reset.setOnClickListener(new View.OnClickListener()
+        {
+            public void onClick(View view) //This method will occur when it is clicked.
+            {
+                B1.setText(""); B2.setText(""); B3.setText(""); B4.setText(""); B5.setText(""); B6.setText(""); B7.setText(""); B8.setText(""); B9.setText("");
+            }
+        });
     }
 
     //Coding logic for X's and O's.
@@ -143,6 +151,8 @@ public class Human extends AppCompatActivity
             System.out.println("Board Position: " + X);
             updateArray(X, 1);
             checkWin();
+            checkDraw(); //If there is a draw (=true)
+
         }
         else //If false, then the last value was a 0, thus it was a O.
         {
@@ -152,12 +162,21 @@ public class Human extends AppCompatActivity
             System.out.println("Board Position: " + X);
             updateArray(X, 0);
             checkWin();
+            checkDraw(); //If there is a draw (=true)
         }
     }
 
-    public int getN(int n)
+    private int getN(int n)
     {
         return (n);
+    }
+
+    private void resetArray() //Reset the game
+    {
+        for(int reset = 0; reset < 9; reset++)
+        {
+            Board[reset] = 7;
+        }
     }
 
     private void updateArray(int x,int XorO) //Updates global array to change the 7 into a 1 or a 0.
@@ -166,102 +185,147 @@ public class Human extends AppCompatActivity
         System.out.print(Arrays.toString(Board));
     }
 
+    private boolean checkDraw() //Checks the global array to see if there are no 7's available.
+    {
+        boolean check = false;
+        int count = 0;
+        for(int i = 0; i < 9; i++)
+        {
+            if(Board[i] == 7)
+            {
+                check = false;
+                break;
+            }
+            else
+            {
+                count++;
+            }
+        }
+
+        if(count == 9)
+        {
+            check = true;
+            Intent playIntent = new Intent(Human.this, Human.class); //Points it to the Human finish
+            startActivity(playIntent);
+            resetArray();
+            System.out.println("It's a draw!!!");
+        }
+
+        return(check);
+    }
+
     private void checkWin() //Consistently checks the global array after it has been altered to see if there is a win
     {
         if (Board[0] == 1 && Board[1] == 1 && Board[2] == 1) //FIRST ROW ALL X'S
         {
             Intent playIntent = new Intent(Human.this, humanFinish.class); //Points it to the Human finish
             startActivity(playIntent);
+            resetArray();
         }
 
         else if (Board[0] == 0 && Board[1] == 0 && Board[2] == 0) //FIRST ROW ALL O'S
         {
             Intent playIntent = new Intent(Human.this, humanFinish.class); //Points it to the Human finish
             startActivity(playIntent);
+            resetArray();
         }
 
         else if (Board[3] == 1 && Board[4] == 1 && Board[5] == 1) //SECOND ROW ALL X'S
         {
             Intent playIntent = new Intent(Human.this, humanFinish.class); //Points it to the Human finish
             startActivity(playIntent);
+            resetArray();
         }
 
         else if (Board[3] == 0 && Board[4] == 0 && Board[5] == 0) //SECOND ROW ALL O'S
         {
             Intent playIntent = new Intent(Human.this, humanFinish.class); //Points it to the Human finish
             startActivity(playIntent);
+            resetArray();
         }
 
         else if (Board[6] == 1 && Board[7] == 1 && Board[8] == 1) //THIRD ROW ALL X'S
         {
             Intent playIntent = new Intent(Human.this, humanFinish.class); //Points it to the Human finish
             startActivity(playIntent);
+            resetArray();
         }
 
         else if (Board[6] == 0 && Board[7] == 0 && Board[8] == 0) //THIRD ROW ALL O'S
         {
             Intent playIntent = new Intent(Human.this, humanFinish.class); //Points it to the Human finish
             startActivity(playIntent);
+            resetArray();
         }
 
         else if (Board[0] == 0 && Board[3] == 0 && Board[6] == 0) //FIRST COLUMN ALL O'S
         {
             Intent playIntent = new Intent(Human.this, humanFinish.class); //Points it to the Human finish
             startActivity(playIntent);
+            resetArray();
         }
 
         else if (Board[0] == 1 && Board[3] == 1 && Board[6] == 1) //FIRST COLUMN ALL X'S
         {
             Intent playIntent = new Intent(Human.this, humanFinish.class); //Points it to the Human finish
             startActivity(playIntent);
+            resetArray();
         }
 
         else if (Board[1] == 0 && Board[4] == 0 && Board[7] == 0) //SECOND COLUMN ALL O'S
         {
             Intent playIntent = new Intent(Human.this, humanFinish.class); //Points it to the Human finish
             startActivity(playIntent);
+            resetArray();
         }
 
         else if (Board[1] == 1 && Board[4] == 1 && Board[7] == 1) //SECOND COLUMN ALL X'S
         {
             Intent playIntent = new Intent(Human.this, humanFinish.class); //Points it to the Human finish
             startActivity(playIntent);
+            resetArray();
         }
 
         else if (Board[2] == 0 && Board[5] == 0 && Board[8] == 0) //THIRD COLUMN ALL O'S
         {
             Intent playIntent = new Intent(Human.this, humanFinish.class); //Points it to the Human finish
             startActivity(playIntent);
+            resetArray();
         }
 
         else if (Board[2] == 1 && Board[5] == 1 && Board[8] == 1) //THIRD COLUMN ALL X'S
         {
             Intent playIntent = new Intent(Human.this, humanFinish.class); //Points it to the Human finish
             startActivity(playIntent);
+            resetArray();
         }
 
         else if (Board[0] == 1 && Board[4] == 1 && Board[8] == 1) //DIAGONAL ALL X'S
         {
             Intent playIntent = new Intent(Human.this, humanFinish.class); //Points it to the Human finish
             startActivity(playIntent);
+            resetArray();
         }
 
         else if (Board[0] == 0 && Board[4] == 0 && Board[8] == 0) //DIAGONAL ALL O'S
         {
             Intent playIntent = new Intent(Human.this, humanFinish.class); //Points it to the Human finish
             startActivity(playIntent);
+            resetArray();
         }
 
         else if (Board[2] == 0 && Board[4] == 0 && Board[6] == 0) //DIAGONAL 2 ALL O'S
         {
             Intent playIntent = new Intent(Human.this, humanFinish.class); //Points it to the Human finish
             startActivity(playIntent);
+            resetArray();
         }
 
         else if (Board[2] == 1 && Board[4] == 1 && Board[6] == 1) //DIAGONAL 2 ALL X'S
         {
             Intent playIntent = new Intent(Human.this, humanFinish.class); //Points it to the Human finish
             startActivity(playIntent);
+            resetArray();
         }
     }
 }
