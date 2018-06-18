@@ -19,7 +19,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".playOptions" />
-        <activity android:name=".Human"></activity>
+        <activity android:name=".Human" />
+        <activity android:name=".humanFinish"></activity>
     </application>
 
 </manifest>

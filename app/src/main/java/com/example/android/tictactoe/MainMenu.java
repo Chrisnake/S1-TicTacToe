@@ -10,6 +10,8 @@ import android.widget.Button;
 
 public class MainMenu extends AppCompatActivity
 {
+    public static final String DEBUGTAG = "CHRISVILLEGAS";
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
