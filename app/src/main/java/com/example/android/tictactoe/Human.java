@@ -128,7 +128,7 @@ public class Human extends AppCompatActivity
 
     //Coding logic for X's and O's.
 
-    private boolean turnCheck() //This method checks who's turn it is, thus it will get the global arraylist and check what the last move was.
+    protected boolean turnCheck() //This method checks who's turn it is, thus it will get the global arraylist and check what the last move was.
     {
        int check =  moveList.get(moveList.size() - 1);
        if (check == 0) //If the final move was made by a nought (O).
@@ -141,7 +141,7 @@ public class Human extends AppCompatActivity
        }
     }
 
-    private void Move(Button b, int position)
+    protected void Move(Button b, int position)
     {
         if (turnCheck()) //If turnCheck returns true, then the last value was a 1, thus it was an X.
         {
@@ -166,12 +166,12 @@ public class Human extends AppCompatActivity
         }
     }
 
-    private int getN(int n)
+    protected int getN(int n)
     {
         return (n);
     }
 
-    private void resetArray() //Reset the game
+    protected void resetArray() //Reset the game
     {
         for(int reset = 0; reset < 9; reset++)
         {
@@ -179,13 +179,13 @@ public class Human extends AppCompatActivity
         }
     }
 
-    private void updateArray(int x,int XorO) //Updates global array to change the 7 into a 1 or a 0.
+    protected void updateArray(int x,int XorO) //Updates global array to change the 7 into a 1 or a 0.
     {
         Board[x] = XorO;
         System.out.print(Arrays.toString(Board));
     }
 
-    private boolean checkDraw() //Checks the global array to see if there are no 7's available.
+    protected boolean checkDraw() //Checks the global array to see if there are no 7's available.
     {
         boolean check = false;
         int count = 0;
@@ -214,13 +214,15 @@ public class Human extends AppCompatActivity
         return(check);
     }
 
-    private void checkWin() //Consistently checks the global array after it has been altered to see if there is a win
+    protected boolean checkWin() //Consistently checks the global array after it has been altered to see if there is a win
     {
+        boolean check = false;
         if (Board[0] == 1 && Board[1] == 1 && Board[2] == 1) //FIRST ROW ALL X'S
         {
             Intent playIntent = new Intent(Human.this, humanFinish.class); //Points it to the Human finish
             startActivity(playIntent);
             resetArray();
+            check = true;
         }
 
         else if (Board[0] == 0 && Board[1] == 0 && Board[2] == 0) //FIRST ROW ALL O'S
@@ -228,6 +230,7 @@ public class Human extends AppCompatActivity
             Intent playIntent = new Intent(Human.this, humanFinish.class); //Points it to the Human finish
             startActivity(playIntent);
             resetArray();
+            check = true;
         }
 
         else if (Board[3] == 1 && Board[4] == 1 && Board[5] == 1) //SECOND ROW ALL X'S
@@ -235,6 +238,7 @@ public class Human extends AppCompatActivity
             Intent playIntent = new Intent(Human.this, humanFinish.class); //Points it to the Human finish
             startActivity(playIntent);
             resetArray();
+            check = true;
         }
 
         else if (Board[3] == 0 && Board[4] == 0 && Board[5] == 0) //SECOND ROW ALL O'S
@@ -242,6 +246,7 @@ public class Human extends AppCompatActivity
             Intent playIntent = new Intent(Human.this, humanFinish.class); //Points it to the Human finish
             startActivity(playIntent);
             resetArray();
+            check = true;
         }
 
         else if (Board[6] == 1 && Board[7] == 1 && Board[8] == 1) //THIRD ROW ALL X'S
@@ -249,6 +254,7 @@ public class Human extends AppCompatActivity
             Intent playIntent = new Intent(Human.this, humanFinish.class); //Points it to the Human finish
             startActivity(playIntent);
             resetArray();
+            check = true;
         }
 
         else if (Board[6] == 0 && Board[7] == 0 && Board[8] == 0) //THIRD ROW ALL O'S
@@ -256,6 +262,7 @@ public class Human extends AppCompatActivity
             Intent playIntent = new Intent(Human.this, humanFinish.class); //Points it to the Human finish
             startActivity(playIntent);
             resetArray();
+            check = true;
         }
 
         else if (Board[0] == 0 && Board[3] == 0 && Board[6] == 0) //FIRST COLUMN ALL O'S
@@ -263,6 +270,7 @@ public class Human extends AppCompatActivity
             Intent playIntent = new Intent(Human.this, humanFinish.class); //Points it to the Human finish
             startActivity(playIntent);
             resetArray();
+            check = true;
         }
 
         else if (Board[0] == 1 && Board[3] == 1 && Board[6] == 1) //FIRST COLUMN ALL X'S
@@ -270,6 +278,7 @@ public class Human extends AppCompatActivity
             Intent playIntent = new Intent(Human.this, humanFinish.class); //Points it to the Human finish
             startActivity(playIntent);
             resetArray();
+            check = true;
         }
 
         else if (Board[1] == 0 && Board[4] == 0 && Board[7] == 0) //SECOND COLUMN ALL O'S
@@ -277,6 +286,7 @@ public class Human extends AppCompatActivity
             Intent playIntent = new Intent(Human.this, humanFinish.class); //Points it to the Human finish
             startActivity(playIntent);
             resetArray();
+            check = true;
         }
 
         else if (Board[1] == 1 && Board[4] == 1 && Board[7] == 1) //SECOND COLUMN ALL X'S
@@ -284,6 +294,7 @@ public class Human extends AppCompatActivity
             Intent playIntent = new Intent(Human.this, humanFinish.class); //Points it to the Human finish
             startActivity(playIntent);
             resetArray();
+            check = true;
         }
 
         else if (Board[2] == 0 && Board[5] == 0 && Board[8] == 0) //THIRD COLUMN ALL O'S
@@ -291,6 +302,7 @@ public class Human extends AppCompatActivity
             Intent playIntent = new Intent(Human.this, humanFinish.class); //Points it to the Human finish
             startActivity(playIntent);
             resetArray();
+            check = true;
         }
 
         else if (Board[2] == 1 && Board[5] == 1 && Board[8] == 1) //THIRD COLUMN ALL X'S
@@ -298,6 +310,7 @@ public class Human extends AppCompatActivity
             Intent playIntent = new Intent(Human.this, humanFinish.class); //Points it to the Human finish
             startActivity(playIntent);
             resetArray();
+            check = true;
         }
 
         else if (Board[0] == 1 && Board[4] == 1 && Board[8] == 1) //DIAGONAL ALL X'S
@@ -305,6 +318,7 @@ public class Human extends AppCompatActivity
             Intent playIntent = new Intent(Human.this, humanFinish.class); //Points it to the Human finish
             startActivity(playIntent);
             resetArray();
+            check = true;
         }
 
         else if (Board[0] == 0 && Board[4] == 0 && Board[8] == 0) //DIAGONAL ALL O'S
@@ -312,6 +326,7 @@ public class Human extends AppCompatActivity
             Intent playIntent = new Intent(Human.this, humanFinish.class); //Points it to the Human finish
             startActivity(playIntent);
             resetArray();
+            check = true;
         }
 
         else if (Board[2] == 0 && Board[4] == 0 && Board[6] == 0) //DIAGONAL 2 ALL O'S
@@ -319,6 +334,7 @@ public class Human extends AppCompatActivity
             Intent playIntent = new Intent(Human.this, humanFinish.class); //Points it to the Human finish
             startActivity(playIntent);
             resetArray();
+            check = true;
         }
 
         else if (Board[2] == 1 && Board[4] == 1 && Board[6] == 1) //DIAGONAL 2 ALL X'S
@@ -326,6 +342,9 @@ public class Human extends AppCompatActivity
             Intent playIntent = new Intent(Human.this, humanFinish.class); //Points it to the Human finish
             startActivity(playIntent);
             resetArray();
+            check = true;
         }
+
+        return check;
     }
 }

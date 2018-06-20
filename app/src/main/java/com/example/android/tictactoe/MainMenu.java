@@ -25,12 +25,21 @@ public class MainMenu extends AppCompatActivity
         background.start();
 
         Button Play = findViewById(R.id.PlayButton);
-        AnimationUtils.loadAnimation(this,R.anim.bounce);
         Play.setOnClickListener(new View.OnClickListener()
         {
             public void onClick(View view) //This method will occur when it is clicked.
             {
                 Intent playIntent = new Intent(MainMenu.this, playOptions.class); //Points it to the Highscores.
+                startActivity(playIntent);
+            }
+        });
+
+        Button Scores = findViewById(R.id.Scores);
+        Scores.setOnClickListener(new View.OnClickListener()
+        {
+            public void onClick(View view) //This method will occur when it is clicked.
+            {
+                Intent playIntent = new Intent(MainMenu.this, Scores.class); //Points it to the Highscores.
                 startActivity(playIntent);
             }
         });

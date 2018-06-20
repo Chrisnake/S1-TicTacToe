@@ -17,20 +17,20 @@
         android:text="PLAY"
         android:background="@android:color/holo_red_light"
         android:textColor="@android:color/white"
-        app:layout_constraintBottom_toTopOf="@+id/SettingsButton"
+        app:layout_constraintBottom_toTopOf="@+id/Scores"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
 
     <Button
-        android:id="@+id/SettingsButton"
+        android:id="@+id/Scores"
         android:layout_width="100dp"
         android:layout_height="50dp"
         android:layout_marginBottom="8dp"
         android:layout_marginTop="8dp"
         android:background="@android:color/holo_red_light"
-        android:text="SETTINGS"
+        android:text="SCORES"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -52,7 +52,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintVertical_bias="0.019"
         app:srcCompat="@drawable/logo" />
 
 </android.support.constraint.ConstraintLayout>

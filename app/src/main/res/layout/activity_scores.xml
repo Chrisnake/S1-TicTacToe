@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Scores"
+    tools:layout_editor_absoluteY="25dp">
+
+    <ImageView
+        android:id="@+id/X"
+        android:layout_width="101dp"
+        android:layout_height="132dp"
+        android:layout_marginEnd="76dp"
+        android:layout_marginLeft="64dp"
+        android:layout_marginRight="76dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="143dp"
+        app:layout_constraintBottom_toTopOf="@+id/O"
+        app:layout_constraintEnd_toStartOf="@+id/XWins"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/winner" />
+
+    <ImageView
+        android:id="@+id/O"
+        android:layout_width="102dp"
+        android:layout_height="132dp"
+        android:layout_marginBottom="160dp"
+        android:layout_marginEnd="64dp"
+        android:layout_marginLeft="64dp"
+        android:layout_marginRight="64dp"
+        android:layout_marginStart="64dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/OWins"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/o" />
+
+    <TextView
+        android:id="@+id/winsText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="75dp"
+        android:layout_marginRight="75dp"
+        android:layout_marginTop="116dp"
+        android:text="TOTAL WINS"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/XWins"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="84dp"
+        android:layout_marginStart="84dp"
+        android:layout_marginTop="29dp"
+        android:text="0"
+        android:textSize="70sp"
+        app:layout_constraintStart_toEndOf="@+id/X"
+        app:layout_constraintTop_toBottomOf="@+id/winsText" />
+
+    <TextView
+        android:id="@+id/OWins"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="84dp"
+        android:layout_marginStart="84dp"
+        android:layout_marginTop="40dp"
+        android:text="0"
+        android:textSize="70sp"
+        app:layout_constraintStart_toEndOf="@+id/O"
+        app:layout_constraintTop_toBottomOf="@+id/XWins" />
+</android.support.constraint.ConstraintLayout>

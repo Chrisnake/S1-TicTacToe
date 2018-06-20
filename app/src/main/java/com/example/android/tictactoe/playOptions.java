@@ -23,5 +23,15 @@ public class playOptions extends AppCompatActivity {
                 startActivity(playIntent);
             }
         });
+
+        Button CPU = findViewById(R.id.VSCPU);
+        CPU.setOnClickListener(new View.OnClickListener()
+        {
+            public void onClick(View view)
+            {
+                Intent playIntent = new Intent(playOptions.this, CPU.class);
+                startActivity(playIntent);
+            }
+        });
     }
 }

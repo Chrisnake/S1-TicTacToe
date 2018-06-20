@@ -20,7 +20,9 @@
         </activity>
         <activity android:name=".playOptions" />
         <activity android:name=".Human" />
-        <activity android:name=".humanFinish"></activity>
+        <activity android:name=".humanFinish" />
+        <activity android:name=".Scores" />
+        <activity android:name=".CPU"></activity>
     </application>
 
 </manifest>
