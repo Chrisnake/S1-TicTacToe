@@ -15,12 +15,22 @@ public class humanFinish extends AppCompatActivity {
         setContentView(R.layout.activity_human_finish);
 
 
-        Button Replay = findViewById(R.id.Replay);
-        Replay.setOnClickListener(new View.OnClickListener()
+        Button replayHuman = findViewById(R.id.replayHuman);
+        replayHuman.setOnClickListener(new View.OnClickListener()
         {
             public void onClick(View view)
             {
                 Intent playIntent = new Intent(humanFinish.this, Human.class); //Points it back to the human activity
+                startActivity(playIntent);
+            }
+        });
+
+        Button replayCPU = findViewById(R.id.replayCPU);
+        replayCPU.setOnClickListener(new View.OnClickListener()
+        {
+            public void onClick(View view)
+            {
+                Intent playIntent = new Intent(humanFinish.this, CPU.class); //Points it back to the human activity
                 startActivity(playIntent);
             }
         });

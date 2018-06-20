@@ -15,8 +15,8 @@ import java.util.Arrays;
 
 public class Human extends AppCompatActivity
 {
-    private ArrayList<Integer> moveList = new ArrayList<Integer>();
-    private int Board[] = {7, 7, 7, 7, 7, 7, 7, 7, 7};
+    private static ArrayList<Integer> moveList = new ArrayList<Integer>();
+    private static int[] Board = {7, 7, 7, 7, 7, 7, 7, 7, 7};
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -128,7 +128,7 @@ public class Human extends AppCompatActivity
 
     //Coding logic for X's and O's.
 
-    protected boolean turnCheck() //This method checks who's turn it is, thus it will get the global arraylist and check what the last move was.
+    protected static boolean turnCheck() //This method checks who's turn it is, thus it will get the global arraylist and check what the last move was.
     {
        int check =  moveList.get(moveList.size() - 1);
        if (check == 0) //If the final move was made by a nought (O).
@@ -150,7 +150,7 @@ public class Human extends AppCompatActivity
             int X = getN(position);
             System.out.println("Board Position: " + X);
             updateArray(X, 1);
-            checkWin();
+            checkWin(Board);
             checkDraw(); //If there is a draw (=true)
 
         }
@@ -161,7 +161,7 @@ public class Human extends AppCompatActivity
             int X = getN(position);
             System.out.println("Board Position: " + X);
             updateArray(X, 0);
-            checkWin();
+            checkWin(Board);
             checkDraw(); //If there is a draw (=true)
         }
     }
@@ -171,7 +171,7 @@ public class Human extends AppCompatActivity
         return (n);
     }
 
-    protected void resetArray() //Reset the game
+    protected void resetArray(int Board[]) //Reset the game
     {
         for(int reset = 0; reset < 9; reset++)
         {
@@ -179,10 +179,10 @@ public class Human extends AppCompatActivity
         }
     }
 
-    protected void updateArray(int x,int XorO) //Updates global array to change the 7 into a 1 or a 0.
+    protected static void updateArray(int x, int XorO) //Updates global array to change the 7 into a 1 or a 0.
     {
         Board[x] = XorO;
-        System.out.print(Arrays.toString(Board));
+        System.out.print("Board state updated! : " + Arrays.toString(Board));
     }
 
     protected boolean checkDraw() //Checks the global array to see if there are no 7's available.
@@ -207,21 +207,21 @@ public class Human extends AppCompatActivity
             check = true;
             Intent playIntent = new Intent(Human.this, Human.class); //Points it to the Human finish
             startActivity(playIntent);
-            resetArray();
+            resetArray(Board);
             System.out.println("It's a draw!!!");
         }
 
         return(check);
     }
 
-    protected boolean checkWin() //Consistently checks the global array after it has been altered to see if there is a win
+    protected boolean checkWin(int Board[]) //Consistently checks the global array after it has been altered to see if there is a win
     {
         boolean check = false;
         if (Board[0] == 1 && Board[1] == 1 && Board[2] == 1) //FIRST ROW ALL X'S
         {
             Intent playIntent = new Intent(Human.this, humanFinish.class); //Points it to the Human finish
             startActivity(playIntent);
-            resetArray();
+            resetArray(Board);
             check = true;
         }
 
@@ -229,7 +229,7 @@ public class Human extends AppCompatActivity
         {
             Intent playIntent = new Intent(Human.this, humanFinish.class); //Points it to the Human finish
             startActivity(playIntent);
-            resetArray();
+            resetArray(Board);
             check = true;
         }
 
@@ -237,7 +237,7 @@ public class Human extends AppCompatActivity
         {
             Intent playIntent = new Intent(Human.this, humanFinish.class); //Points it to the Human finish
             startActivity(playIntent);
-            resetArray();
+            resetArray(Board);
             check = true;
         }
 
@@ -245,7 +245,7 @@ public class Human extends AppCompatActivity
         {
             Intent playIntent = new Intent(Human.this, humanFinish.class); //Points it to the Human finish
             startActivity(playIntent);
-            resetArray();
+            resetArray(Board);
             check = true;
         }
 
@@ -253,7 +253,7 @@ public class Human extends AppCompatActivity
         {
             Intent playIntent = new Intent(Human.this, humanFinish.class); //Points it to the Human finish
             startActivity(playIntent);
-            resetArray();
+            resetArray(Board);
             check = true;
         }
 
@@ -261,7 +261,7 @@ public class Human extends AppCompatActivity
         {
             Intent playIntent = new Intent(Human.this, humanFinish.class); //Points it to the Human finish
             startActivity(playIntent);
-            resetArray();
+            resetArray(Board);
             check = true;
         }
 
@@ -269,7 +269,7 @@ public class Human extends AppCompatActivity
         {
             Intent playIntent = new Intent(Human.this, humanFinish.class); //Points it to the Human finish
             startActivity(playIntent);
-            resetArray();
+            resetArray(Board);
             check = true;
         }
 
@@ -277,7 +277,7 @@ public class Human extends AppCompatActivity
         {
             Intent playIntent = new Intent(Human.this, humanFinish.class); //Points it to the Human finish
             startActivity(playIntent);
-            resetArray();
+            resetArray(Board);
             check = true;
         }
 
@@ -285,7 +285,7 @@ public class Human extends AppCompatActivity
         {
             Intent playIntent = new Intent(Human.this, humanFinish.class); //Points it to the Human finish
             startActivity(playIntent);
-            resetArray();
+            resetArray(Board);
             check = true;
         }
 
@@ -293,7 +293,7 @@ public class Human extends AppCompatActivity
         {
             Intent playIntent = new Intent(Human.this, humanFinish.class); //Points it to the Human finish
             startActivity(playIntent);
-            resetArray();
+            resetArray(Board);
             check = true;
         }
 
@@ -301,7 +301,7 @@ public class Human extends AppCompatActivity
         {
             Intent playIntent = new Intent(Human.this, humanFinish.class); //Points it to the Human finish
             startActivity(playIntent);
-            resetArray();
+            resetArray(Board);
             check = true;
         }
 
@@ -309,7 +309,7 @@ public class Human extends AppCompatActivity
         {
             Intent playIntent = new Intent(Human.this, humanFinish.class); //Points it to the Human finish
             startActivity(playIntent);
-            resetArray();
+            resetArray(Board);
             check = true;
         }
 
@@ -317,7 +317,7 @@ public class Human extends AppCompatActivity
         {
             Intent playIntent = new Intent(Human.this, humanFinish.class); //Points it to the Human finish
             startActivity(playIntent);
-            resetArray();
+            resetArray(Board);
             check = true;
         }
 
@@ -325,7 +325,7 @@ public class Human extends AppCompatActivity
         {
             Intent playIntent = new Intent(Human.this, humanFinish.class); //Points it to the Human finish
             startActivity(playIntent);
-            resetArray();
+            resetArray(Board);
             check = true;
         }
 
@@ -333,7 +333,7 @@ public class Human extends AppCompatActivity
         {
             Intent playIntent = new Intent(Human.this, humanFinish.class); //Points it to the Human finish
             startActivity(playIntent);
-            resetArray();
+            resetArray(Board);
             check = true;
         }
 
@@ -341,7 +341,7 @@ public class Human extends AppCompatActivity
         {
             Intent playIntent = new Intent(Human.this, humanFinish.class); //Points it to the Human finish
             startActivity(playIntent);
-            resetArray();
+            resetArray(Board);
             check = true;
         }
 

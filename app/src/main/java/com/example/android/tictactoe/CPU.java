@@ -11,104 +11,107 @@ import java.util.Arrays;
 
 public class CPU extends Human {
 
-    private ArrayList<Integer> moveList = new ArrayList<Integer>();
-    private static int[] Board = {7, 7, 7, 7, 7, 7, 7, 7, 7};
+    private static ArrayList<Integer> CPUmoveList = new ArrayList<Integer>();
+    private static int[] CBoard = {7, 7, 7, 7, 7, 7, 7, 7, 7};
+    Button B1, B2, B3, B4, B5, B6, B7, B8, B9;
+    ArrayList<Button> buttons = new ArrayList<Button>();
 
     @Override
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_human);
-        moveList.add(1);//Adding 1 to the moveList array list to state that the first move will go to X.
-        System.out.println(Arrays.toString(Board));
+        CPUmoveList.add(1);//Adding 1 to the moveList array list to state that the first move will go to X.
+        System.out.println(Arrays.toString(CBoard));
 
-        final Button B1 = findViewById(R.id.B1);
+        B1 = findViewById(R.id.B1);
         B1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) //This method will occur when it is clicked.
             {
                 int position = 0;
                 Move(B1, position);
-                CPUMove(B1,bestPosition(fitnessList()));
+                CPUMove(bestPosition(fitnessList()));
             }
         });
 
-        final Button B2 = findViewById(R.id.B2);
+        B2 = findViewById(R.id.B2);
         B2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) //This method will occur when it is clicked.
             {
                 int position = 1;
                 Move(B2, position);
-                CPUMove(B1,bestPosition(fitnessList()));
+                CPUMove(bestPosition(fitnessList()));
             }
         });
 
-        final Button B3 = findViewById(R.id.B3);
+        B3 = findViewById(R.id.B3);
         B3.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) //This method will occur when it is clicked.
             {
                 int position = 2;
                 Move(B3, position);
-                CPUMove(B1,bestPosition(fitnessList()));
+                CPUMove(bestPosition(fitnessList()));
             }
         });
 
-        final Button B4 = findViewById(R.id.B4);
+        B4 = findViewById(R.id.B4);
         B4.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) //This method will occur when it is clicked.
             {
                 int position = 3;
                 Move(B4, position);
-                CPUMove(B1,bestPosition(fitnessList()));
+                CPUMove(bestPosition(fitnessList()));
             }
         });
 
-        final Button B5 = findViewById(R.id.B5);
+        B5 = findViewById(R.id.B5);
         B5.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) //This method will occur when it is clicked.
             {
                 int position = 4;
                 Move(B5, position);
-                CPUMove(B1,bestPosition(fitnessList()));
+                CPUMove(bestPosition(fitnessList()));
             }
         });
 
-        final Button B6 = findViewById(R.id.B6);
+        B6 = findViewById(R.id.B6);
         B6.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) //This method will occur when it is clicked.
             {
                 int position = 5;
                 Move(B6, position);
-                CPUMove(B1,bestPosition(fitnessList()));
+                CPUMove(bestPosition(fitnessList()));
             }
         });
 
-        final Button B7 = findViewById(R.id.B7);
+        B7 = findViewById(R.id.B7);
         B7.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) //This method will occur when it is clicked.
             {
                 int position = 6;
                 Move(B7, position);
-                CPUMove(B1,bestPosition(fitnessList()));
+                CPUMove(bestPosition(fitnessList()));
+
             }
         });
 
-        final Button B8 = findViewById(R.id.B8);
+        B8 = findViewById(R.id.B8);
         B8.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) //This method will occur when it is clicked.
             {
                 int position = 7;
                 Move(B8, position);
-                CPUMove(B1,bestPosition(fitnessList()));
+                CPUMove(bestPosition(fitnessList()));
             }
         });
 
-        final Button B9 = findViewById(R.id.B9);
+        B9 = findViewById(R.id.B9);
         B9.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) //This method will occur when it is clicked.
             {
                 int position = 8;
                 Move(B9, position);
-                CPUMove(B1,bestPosition(fitnessList()));
+                CPUMove(bestPosition(fitnessList()));
             }
         });
 
@@ -127,32 +130,64 @@ public class CPU extends Human {
                 B9.setText("");
             }
         });
+
+        buttons.add(B1); buttons.add(B2); buttons.add(B3); buttons.add(B4);
+        buttons.add(B5); buttons.add(B6); buttons.add(B7); buttons.add(B8);
     }
 
-    public void CPUMove(Button b, int bestPosition) //Gets the best position for the CPU and moves using that best position.
+    public Button findButton(int bestPosition)
+    {
+        return (buttons.get(bestPosition));
+    }
+
+    public void CPUMove(int bestPosition) //Gets the best position for the CPU and moves using that best position.
+    {
+        if (turnCheck()) //If turnCheck returns true, then the last value was a 1, thus it was an X.
+        {
+            findButton(bestPosition).setText("X");
+            CPUmoveList.add(0);//If it was 1, then we add 0 to the array list, because the next move should be from the nought.
+            int X = getN(bestPosition);
+            System.out.println("Board Position: " + X);
+            CupdateArray(X, 1);
+            checkWin(CBoard);
+            CPUcheckDraw(CBoard); //If there is a draw (=true)
+        }
+        else //If false, then the last value was a 0, thus it was a O.
+        {
+            findButton(bestPosition).setText("O");
+            CPUmoveList.add(1);
+            int X = getN(bestPosition);
+            System.out.println("Board Position: " + X);
+            CupdateArray(X, 0);
+            checkWin(CBoard);
+            CPUcheckDraw(CBoard); //If there is a draw (=true)
+        }
+    }
+
+    protected void Move(Button b, int position)
     {
         if (turnCheck()) //If turnCheck returns true, then the last value was a 1, thus it was an X.
         {
             b.setText("X");
-            moveList.add(0);//If it was 1, then we add 0 to the array list, because the next move should be from the nought.
-            int X = getN(bestPosition);
+            CPUmoveList.add(0);//If it was 1, then we add 0 to the array list, because the next move should be from the nought.
+            int X = getN(position);
             System.out.println("Board Position: " + X);
-            updateArray(X, 1);
-            checkWin();
-            checkDraw(); //If there is a draw (=true)
-
+            CupdateArray(X, 1);
+            checkWin(CBoard);
+            CPUcheckDraw(CBoard); //If there is a draw (=true)
         }
         else //If false, then the last value was a 0, thus it was a O.
         {
             b.setText("O");
-            moveList.add(1);
-            int X = getN(bestPosition);
+            CPUmoveList.add(1);
+            int X = getN(position);
             System.out.println("Board Position: " + X);
-            updateArray(X, 0);
-            checkWin();
-            checkDraw(); //If there is a draw (=true)
+            CupdateArray(X, 0);
+            checkWin(CBoard);
+            CPUcheckDraw(CBoard); //If there is a draw (=true)
         }
     }
+
     public ArrayList<TTTSolution> fitnessList() //This returns the list of all possible fitnesses and their respective positions in the Board.
     {
         //10 FITNESS IF THEY CAN WIN - MAIN PRIORITY
@@ -164,8 +199,8 @@ public class CPU extends Human {
 
         for(int reviewFitness: CPUMoves)
         {
-            simulatedBoard = Board.clone();
-            if (turnCheck() == false) //If turnCheck = false, then the last value was a 1. Now it is 0's turn.
+            simulatedBoard = CBoard.clone();
+            if (!turnCheck()) //If turnCheck = false, then the last value was a 1. Now it is 0's turn.
             {
                 System.out.print(reviewFitness + "POSITION BEING REVIEWED");
                 simulatedBoard[reviewFitness] = 0;  //FIRSTLY - CHECKS IF THERE IS A LOSS BY SEEING THE NEXT OPPONENTS MOVE
@@ -180,7 +215,7 @@ public class CPU extends Human {
                 else
                 {
                     simulatedBoard[reviewFitness] = 1;
-                    if (checkWin(simulatedBoard, 0) == 1) //Then check to see if there is a win on the "simulated board"
+                    if (CPUCheckWin(simulatedBoard, 0) == 1) //Then check to see if there is a win on the "simulated board"
                     {
                         //IF THE LAST MOVE WAS BY A 0, THEN CHECK TO SEE IF ANY 1'S CAN WIN
                         TTTSolution hey = new TTTSolution(10,reviewFitness);
@@ -195,7 +230,7 @@ public class CPU extends Human {
                     }
                 }
             }
-            else if (turnCheck() == true) //If the last move was made by a 1, then it is 0's turn
+            else if (turnCheck()) //If the last move was made by a 1, then it is 0's turn
             {
                 System.out.print(reviewFitness + "POSITION BEING REVIEWED");
                 simulatedBoard[reviewFitness] = 1;  //FIRSTLY - CHECKS IF THERE IS A LOSS BY SEEING THE NEXT OPPONENTS MOVE
@@ -210,7 +245,7 @@ public class CPU extends Human {
                 else
                 {
                     simulatedBoard[reviewFitness] = 0;
-                    if (checkWin(simulatedBoard, 1) == 0) //Then check to see if there is a win on the "simulated board"
+                    if (CPUCheckWin(simulatedBoard, 1) == 0) //Then check to see if there is a win on the "simulated board"
                     {
                         //IF THE LAST MOVE WAS BY A 0, THEN CHECK TO SEE IF ANY 1'S CAN WIN
                         TTTSolution hey = new TTTSolution(10,reviewFitness);
@@ -256,8 +291,9 @@ public class CPU extends Human {
     {
         ArrayList<Integer> possibleMoves = new ArrayList<Integer>();
         int increment = 0;
-        for(int hey : Board)
+        for(int hey : CBoard)
         {
+
             if(hey == 7)//if there is a 7 then add it to possible arraylist
             {
                 possibleMoves.add(increment);
@@ -287,6 +323,35 @@ public class CPU extends Human {
         }
 
         return check;
+    }
+
+    protected boolean CPUcheckDraw(int Board[]) //Checks the global array to see if there are no 7's available.
+    {
+        boolean check = false;
+        int count = 0;
+        for(int i = 0; i < 9; i++)
+        {
+            if(Board[i] == 7)
+            {
+                check = false;
+                break;
+            }
+            else
+            {
+                count++;
+            }
+        }
+
+        if(count == 9)
+        {
+            check = true;
+            Intent playIntent = new Intent(CPU.this, Human.class); //Points it to the Human finish
+            startActivity(playIntent);
+            resetArray(Board);
+            System.out.println("It's a draw!!!");
+        }
+
+        return(check);
     }
     protected static boolean XLogic(int CPUBoard[])
     {
@@ -381,7 +446,7 @@ public class CPU extends Human {
         return check;
     }
 
-    protected static int checkWin(int CPUBoard[], int x) //Consistently checks the global array after it has been altered to see if there is a win
+    protected int CPUCheckWin(int CPUBoard[], int x) //Consistently checks the global array after it has been altered to see if there is a win
     {
         int Win = -1;
         if(x == 0) //If the last move was made by an 0, then it is X's turn.
@@ -399,6 +464,33 @@ public class CPU extends Human {
             }
         }
         return Win;
+    }
+
+    protected static boolean turnCheck() //This method checks who's turn it is, thus it will get the global arraylist and check what the last move was.
+    {
+        int check =  CPUmoveList.get(CPUmoveList.size() - 1);
+        if (check == 0) //If the final move was made by a nought (O).
+        {
+            return(false);
+        }
+        else
+        {
+            return(true);
+        }
+    }
+
+    protected static void CupdateArray(int x, int XorO) //Updates global array to change the 7 into a 1 or a 0.
+    {
+        CBoard[x] = XorO;
+        System.out.print("Board state updated! : " + Arrays.toString(CBoard));
+    }
+
+    protected void resetArray() //Reset the game
+    {
+        for(int reset = 0; reset < 9; reset++)
+        {
+            CBoard[reset] = 7;
+        }
     }
 }
 
