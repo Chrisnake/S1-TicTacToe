@@ -214,5 +214,27 @@
         app:layout_constraintVertical_bias="0.495"
         app:srcCompat="@drawable/red_line2" />
 
+    <TextView
+        android:id="@+id/turnText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="'S TURN"
+        android:textSize="45sp"
+        app:layout_constraintStart_toEndOf="@+id/positionState"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/positionState"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="44dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="32dp"
+        android:text="X"
+        android:textSize="45sp"
+        app:layout_constraintStart_toStartOf="@+id/RL3"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
 </android.support.constraint.ConstraintLayout>

@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".humanFinish">
-
+    tools:context=".XWinCPU">
     <Button
         android:id="@+id/replayHuman"
         android:layout_width="100dp"
@@ -49,5 +48,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/x" />
-
 </android.support.constraint.ConstraintLayout>

@@ -22,7 +22,10 @@
         <activity android:name=".Human" />
         <activity android:name=".humanFinish" />
         <activity android:name=".Scores" />
-        <activity android:name=".CPU"></activity>
+        <activity android:name=".CPU" />
+        <activity android:name=".HumanOWin" />
+        <activity android:name=".XWinCPU" />
+        <activity android:name=".OWinCPU"></activity>
     </application>
 
 </manifest>

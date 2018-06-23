@@ -9,10 +9,12 @@ import android.widget.Button;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class CPU extends Human{
+public class CPU extends AppCompatActivity {
 
     private static ArrayList<Integer> CPUmoveList = new ArrayList<Integer>();
     private static int[] CBoard = {7, 7, 7, 7, 7, 7, 7, 7, 7};
+    public static int XScores;
+    public static int OScores;
     Button B1, B2, B3, B4, B5, B6, B7, B8, B9;
     ArrayList<Button> buttons = new ArrayList<Button>();
 
@@ -183,9 +185,8 @@ public class CPU extends Human{
         {
             findButton(bestPosition).setText("X");
             CPUmoveList.add(0);//If it was 1, then we add 0 to the array list, because the next move should be from the nought.
-            int X = getN(bestPosition);
-            System.out.println("CPU Position: " + X);
-            TTTSolution.updateArray(CBoard, X, 1);
+            System.out.println("CPU Position: " + bestPosition);
+            TTTSolution.updateArray(CBoard, bestPosition, 1);
             checkWin(CBoard);
             CPUcheckDraw(CBoard); //If there is a draw (=true)
         }
@@ -193,9 +194,8 @@ public class CPU extends Human{
         {
             findButton(bestPosition).setText("O");
             CPUmoveList.add(1);
-            int X = getN(bestPosition);
-            System.out.println("CPU Position: " + X);
-            TTTSolution.updateArray(CBoard, X, 0);
+            System.out.println("CPU Position: " + bestPosition);
+            TTTSolution.updateArray(CBoard, bestPosition, 0);
             checkWin(CBoard);
             CPUcheckDraw(CBoard); //If there is a draw (=true)
         }
@@ -207,18 +207,16 @@ public class CPU extends Human{
             {
                 b.setText("X");
                 CPUmoveList.add(0);//If it was 1, then we add 0 to the array list, because the next move should be from the nought.
-                int X = getN(position);
-                System.out.println("Human Position: " + X);
-                TTTSolution.updateArray(CBoard, X, 1);
+                System.out.println("Human Position: " + position);
+                TTTSolution.updateArray(CBoard, position, 1);
                 checkWin(CBoard);
                 CPUcheckDraw(CBoard); //If there is a draw (=true)
             } else //If false, then the last value was a 0, thus it was a O.
             {
                 b.setText("O");
                 CPUmoveList.add(1);
-                int X = getN(position);
-                System.out.println("Human Position: " + X);
-                TTTSolution.updateArray(CBoard, X, 0);
+                System.out.println("Human Position: " + position);
+                TTTSolution.updateArray(CBoard, position, 0);
                 checkWin(CBoard);
                 CPUcheckDraw(CBoard); //If there is a draw (=true)
             }
@@ -366,6 +364,7 @@ public class CPU extends Human{
         System.out.println("Reset Clicked");
         startActivity(playIntent);
     }
+
     protected static boolean turnCheck() //This method checks who's turn it is, thus it will get the global arraylist and check what the last move was.
     {
         int check =  CPUmoveList.get(CPUmoveList.size() - 1);
@@ -377,6 +376,166 @@ public class CPU extends Human{
         {
             return(true);
         }
+    }
+
+    protected boolean checkWin(int Board[]) //Consistently checks the global array after it has been altered to see if there is a win
+    {
+        boolean check = false;
+        if (Board[0] == 1 && Board[1] == 1 && Board[2] == 1) //FIRST ROW ALL X'S
+        {
+            Intent playIntent = new Intent(CPU.this, XWinCPU.class); //Points it to the Human finish
+            startActivity(playIntent);
+            TTTSolution.resetArray(Board);
+            XScores++;
+            check = true;
+        }
+
+        else if (Board[0] == 0 && Board[1] == 0 && Board[2] == 0) //FIRST ROW ALL O'S
+        {
+            Intent playIntent = new Intent(CPU.this, OWinCPU.class); //Points it to the Human finish
+            startActivity(playIntent);
+            TTTSolution.resetArray(Board);
+            OScores++;
+            check = true;
+        }
+
+        else if (Board[3] == 1 && Board[4] == 1 && Board[5] == 1) //SECOND ROW ALL X'S
+        {
+            Intent playIntent = new Intent(CPU.this, XWinCPU.class); //Points it to the Human finish
+            startActivity(playIntent);
+            TTTSolution.resetArray(Board);
+            XScores++;
+            check = true;
+        }
+
+        else if (Board[3] == 0 && Board[4] == 0 && Board[5] == 0) //SECOND ROW ALL O'S
+        {
+            Intent playIntent = new Intent(CPU.this, OWinCPU.class); //Points it to the Human finish
+            startActivity(playIntent);
+            TTTSolution.resetArray(Board);
+            OScores++;
+            check = true;
+        }
+
+        else if (Board[6] == 1 && Board[7] == 1 && Board[8] == 1) //THIRD ROW ALL X'S
+        {
+            Intent playIntent = new Intent(CPU.this, XWinCPU.class); //Points it to the Human finish
+            startActivity(playIntent);
+            TTTSolution.resetArray(Board);
+            XScores++;
+            check = true;
+        }
+
+        else if (Board[6] == 0 && Board[7] == 0 && Board[8] == 0) //THIRD ROW ALL O'S
+        {
+            Intent playIntent = new Intent(CPU.this, OWinCPU.class); //Points it to the Human finish
+            startActivity(playIntent);
+            TTTSolution.resetArray(Board);
+            OScores++;
+            check = true;
+        }
+
+        else if (Board[0] == 0 && Board[3] == 0 && Board[6] == 0) //FIRST COLUMN ALL O'S
+        {
+            Intent playIntent = new Intent(CPU.this, OWinCPU.class); //Points it to the Human finish
+            startActivity(playIntent);
+            TTTSolution.resetArray(Board);
+            OScores++;
+            check = true;
+        }
+
+        else if (Board[0] == 1 && Board[3] == 1 && Board[6] == 1) //FIRST COLUMN ALL X'S
+        {
+            Intent playIntent = new Intent(CPU.this, XWinCPU.class); //Points it to the Human finish
+            startActivity(playIntent);
+            TTTSolution.resetArray(Board);
+            XScores++;
+            check = true;
+        }
+
+        else if (Board[1] == 0 && Board[4] == 0 && Board[7] == 0) //SECOND COLUMN ALL O'S
+        {
+            Intent playIntent = new Intent(CPU.this, OWinCPU.class); //Points it to the Human finish
+            startActivity(playIntent);
+            TTTSolution.resetArray(Board);
+            OScores++;
+            check = true;
+        }
+
+        else if (Board[1] == 1 && Board[4] == 1 && Board[7] == 1) //SECOND COLUMN ALL X'S
+        {
+            Intent playIntent = new Intent(CPU.this, XWinCPU.class); //Points it to the Human finish
+            startActivity(playIntent);
+            TTTSolution.resetArray(Board);
+            XScores++;
+            check = true;
+        }
+
+        else if (Board[2] == 0 && Board[5] == 0 && Board[8] == 0) //THIRD COLUMN ALL O'S
+        {
+            Intent playIntent = new Intent(CPU.this, OWinCPU.class); //Points it to the Human finish
+            startActivity(playIntent);
+            TTTSolution.resetArray(Board);
+            OScores++;
+            check = true;
+        }
+
+        else if (Board[2] == 1 && Board[5] == 1 && Board[8] == 1) //THIRD COLUMN ALL X'S
+        {
+            Intent playIntent = new Intent(CPU.this, XWinCPU.class); //Points it to the Human finish
+            startActivity(playIntent);
+            TTTSolution.resetArray(Board);
+            XScores++;
+            check = true;
+        }
+
+        else if (Board[0] == 1 && Board[4] == 1 && Board[8] == 1) //DIAGONAL ALL X'S
+        {
+            Intent playIntent = new Intent(CPU.this, XWinCPU.class); //Points it to the Human finish
+            startActivity(playIntent);
+            TTTSolution.resetArray(Board);
+            XScores++;
+            check = true;
+        }
+
+        else if (Board[0] == 0 && Board[4] == 0 && Board[8] == 0) //DIAGONAL ALL O'S
+        {
+            Intent playIntent = new Intent(CPU.this, OWinCPU.class); //Points it to the Human finish
+            startActivity(playIntent);
+            TTTSolution.resetArray(Board);
+            OScores++;
+            check = true;
+        }
+
+        else if (Board[2] == 0 && Board[4] == 0 && Board[6] == 0) //DIAGONAL 2 ALL O'S
+        {
+            Intent playIntent = new Intent(CPU.this, OWinCPU.class); //Points it to the Human finish
+            startActivity(playIntent);
+            TTTSolution.resetArray(Board);
+            OScores++;
+            check = true;
+        }
+
+        else if (Board[2] == 1 && Board[4] == 1 && Board[6] == 1) //DIAGONAL 2 ALL X'S
+        {
+            Intent playIntent = new Intent(CPU.this, XWinCPU.class); //Points it to the Human finish
+            startActivity(playIntent);
+            TTTSolution.resetArray(Board);
+            XScores++;
+            check = true;
+        }
+
+        return check;
+    }
+
+    public static int getXScores()
+    {
+        return XScores;
+    }
+
+    public static int getOscores()
+    {
+        return OScores;
     }
 }
 

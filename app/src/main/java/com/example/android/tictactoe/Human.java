@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -17,7 +18,7 @@ public class Human extends AppCompatActivity
 {
     private static ArrayList<Integer> moveList = new ArrayList<Integer>();
     private static int[] Board = {7, 7, 7, 7, 7, 7, 7, 7, 7};
-
+    public static int XScores, OScores;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -127,8 +128,6 @@ public class Human extends AppCompatActivity
         });
     }
 
-    //Coding logic for X's and O's.
-
     protected static boolean turnCheck() //This method checks who's turn it is, thus it will get the global arraylist and check what the last move was.
     {
        int check =  moveList.get(moveList.size() - 1);
@@ -142,7 +141,7 @@ public class Human extends AppCompatActivity
        }
     }
 
-    protected void Move(Button b, int position)
+    protected void Move(Button b, int position) //Responsible for the action of when the user chooses a move
     {
         if(!TTTSolution.repeatCheck(Board, position)) //IF repeatCheck is false when they click a position then that means there is no repeats
         {
@@ -150,31 +149,26 @@ public class Human extends AppCompatActivity
             {
                 b.setText("X");
                 moveList.add(0);//If it was 1, then we add 0 to the array list, because the next move should be from the nought.
-                int X = getN(position);
-                System.out.println("Board Position: " + X);
-                TTTSolution.updateArray(Board, X, 1);
+                System.out.println("Board Position: " + position);
+                TTTSolution.updateArray(Board, position, 1);
                 checkWin(Board);
                 checkDraw(); //If there is a draw (=true)
+                updateText();
 
             } else //If false, then the last value was a 0, thus it was a O.
             {
                 b.setText("O");
                 moveList.add(1);
-                int X = getN(position);
-                System.out.println("Board Position: " + X);
-                TTTSolution.updateArray(Board, X, 0);
+                System.out.println("Board Position: " + position);
+                TTTSolution.updateArray(Board, position, 0);
                 checkWin(Board);
                 checkDraw(); //If there is a draw (=true)
+                updateText();
             }
         }
     }
 
-    protected int getN(int n)
-    {
-        return (n);
-    }
-
-    protected void resetBoard()
+    protected void resetBoard() //Resets the board and array state
     {
         Intent playIntent = new Intent(Human.this, Human.class); //Points it to the Human finish
         TTTSolution.resetArray(Board);
@@ -210,6 +204,7 @@ public class Human extends AppCompatActivity
 
         return(check);
     }
+
     protected boolean checkWin(int Board[]) //Consistently checks the global array after it has been altered to see if there is a win
     {
         boolean check = false;
@@ -218,14 +213,16 @@ public class Human extends AppCompatActivity
             Intent playIntent = new Intent(Human.this, humanFinish.class); //Points it to the Human finish
             startActivity(playIntent);
             TTTSolution.resetArray(Board);
+            XScores++;
             check = true;
         }
 
         else if (Board[0] == 0 && Board[1] == 0 && Board[2] == 0) //FIRST ROW ALL O'S
         {
-            Intent playIntent = new Intent(Human.this, humanFinish.class); //Points it to the Human finish
+            Intent playIntent = new Intent(Human.this, HumanOWin.class); //Points it to the Human finish
             startActivity(playIntent);
             TTTSolution.resetArray(Board);
+            OScores++;
             check = true;
         }
 
@@ -234,14 +231,16 @@ public class Human extends AppCompatActivity
             Intent playIntent = new Intent(Human.this, humanFinish.class); //Points it to the Human finish
             startActivity(playIntent);
             TTTSolution.resetArray(Board);
+            XScores++;
             check = true;
         }
 
         else if (Board[3] == 0 && Board[4] == 0 && Board[5] == 0) //SECOND ROW ALL O'S
         {
-            Intent playIntent = new Intent(Human.this, humanFinish.class); //Points it to the Human finish
+            Intent playIntent = new Intent(Human.this, HumanOWin.class); //Points it to the Human finish
             startActivity(playIntent);
             TTTSolution.resetArray(Board);
+            OScores++;
             check = true;
         }
 
@@ -250,22 +249,25 @@ public class Human extends AppCompatActivity
             Intent playIntent = new Intent(Human.this, humanFinish.class); //Points it to the Human finish
             startActivity(playIntent);
             TTTSolution.resetArray(Board);
+            XScores++;
             check = true;
         }
 
         else if (Board[6] == 0 && Board[7] == 0 && Board[8] == 0) //THIRD ROW ALL O'S
         {
-            Intent playIntent = new Intent(Human.this, humanFinish.class); //Points it to the Human finish
+            Intent playIntent = new Intent(Human.this, HumanOWin.class); //Points it to the Human finish
             startActivity(playIntent);
             TTTSolution.resetArray(Board);
+            OScores++;
             check = true;
         }
 
         else if (Board[0] == 0 && Board[3] == 0 && Board[6] == 0) //FIRST COLUMN ALL O'S
         {
-            Intent playIntent = new Intent(Human.this, humanFinish.class); //Points it to the Human finish
+            Intent playIntent = new Intent(Human.this, HumanOWin.class); //Points it to the Human finish
             startActivity(playIntent);
             TTTSolution.resetArray(Board);
+            OScores++;
             check = true;
         }
 
@@ -274,14 +276,16 @@ public class Human extends AppCompatActivity
             Intent playIntent = new Intent(Human.this, humanFinish.class); //Points it to the Human finish
             startActivity(playIntent);
             TTTSolution.resetArray(Board);
+            XScores++;
             check = true;
         }
 
         else if (Board[1] == 0 && Board[4] == 0 && Board[7] == 0) //SECOND COLUMN ALL O'S
         {
-            Intent playIntent = new Intent(Human.this, humanFinish.class); //Points it to the Human finish
+            Intent playIntent = new Intent(Human.this, HumanOWin.class); //Points it to the Human finish
             startActivity(playIntent);
             TTTSolution.resetArray(Board);
+            OScores++;
             check = true;
         }
 
@@ -290,14 +294,16 @@ public class Human extends AppCompatActivity
             Intent playIntent = new Intent(Human.this, humanFinish.class); //Points it to the Human finish
             startActivity(playIntent);
             TTTSolution.resetArray(Board);
+            XScores++;
             check = true;
         }
 
         else if (Board[2] == 0 && Board[5] == 0 && Board[8] == 0) //THIRD COLUMN ALL O'S
         {
-            Intent playIntent = new Intent(Human.this, humanFinish.class); //Points it to the Human finish
+            Intent playIntent = new Intent(Human.this, HumanOWin.class); //Points it to the Human finish
             startActivity(playIntent);
             TTTSolution.resetArray(Board);
+            OScores++;
             check = true;
         }
 
@@ -306,6 +312,7 @@ public class Human extends AppCompatActivity
             Intent playIntent = new Intent(Human.this, humanFinish.class); //Points it to the Human finish
             startActivity(playIntent);
             TTTSolution.resetArray(Board);
+            XScores++;
             check = true;
         }
 
@@ -314,22 +321,25 @@ public class Human extends AppCompatActivity
             Intent playIntent = new Intent(Human.this, humanFinish.class); //Points it to the Human finish
             startActivity(playIntent);
             TTTSolution.resetArray(Board);
+            XScores++;
             check = true;
         }
 
         else if (Board[0] == 0 && Board[4] == 0 && Board[8] == 0) //DIAGONAL ALL O'S
         {
-            Intent playIntent = new Intent(Human.this, humanFinish.class); //Points it to the Human finish
+            Intent playIntent = new Intent(Human.this, HumanOWin.class); //Points it to the Human finish
             startActivity(playIntent);
             TTTSolution.resetArray(Board);
+            OScores++;
             check = true;
         }
 
         else if (Board[2] == 0 && Board[4] == 0 && Board[6] == 0) //DIAGONAL 2 ALL O'S
         {
-            Intent playIntent = new Intent(Human.this, humanFinish.class); //Points it to the Human finish
+            Intent playIntent = new Intent(Human.this, HumanOWin.class); //Points it to the Human finish
             startActivity(playIntent);
             TTTSolution.resetArray(Board);
+            OScores++;
             check = true;
         }
 
@@ -338,9 +348,34 @@ public class Human extends AppCompatActivity
             Intent playIntent = new Intent(Human.this, humanFinish.class); //Points it to the Human finish
             startActivity(playIntent);
             TTTSolution.resetArray(Board);
+            XScores++;
             check = true;
         }
 
         return check;
+    }
+
+    protected void updateText() //Updates the text everytime a user scores
+    {
+        if(moveList.get(moveList.size() - 1) == 0) //If the last position in the move list is a 0
+        {
+            TextView text = findViewById(R.id.positionState);
+            text.setText("O");
+        }
+        else //If the last position in the move list is a 1
+        {
+            TextView text = findViewById(R.id.positionState);
+            text.setText("X");
+        }
+    }
+
+    public static int getXScores()
+    {
+        return XScores;
+    }
+
+    public static int getOScores()
+    {
+        return OScores;
     }
 }
