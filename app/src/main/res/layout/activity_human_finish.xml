@@ -6,26 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".humanFinish">
 
-    <ImageButton
-        android:id="@+id/imageButton"
-        android:layout_width="160dp"
-        android:layout_height="160dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.301"
-        app:srcCompat="@drawable/winner" />
-
     <Button
         android:id="@+id/replayHuman"
         android:layout_width="100dp"
         android:layout_height="40dp"
         android:layout_marginBottom="100dp"
         android:layout_marginTop="8dp"
-        android:background="@android:color/black"
+        android:background="@android:color/holo_red_light"
         android:text="VS Human"
         android:textColor="@android:color/white"
         android:textSize="12sp"
@@ -41,7 +28,7 @@
         android:layout_height="40dp"
         android:layout_marginBottom="152dp"
         android:layout_marginTop="8dp"
-        android:background="@android:color/black"
+        android:background="@android:color/holo_red_light"
         android:text="VS CPU"
         android:textColor="@android:color/white"
         android:textSize="12sp"
@@ -57,7 +44,7 @@
         android:layout_height="40dp"
         android:layout_marginBottom="204dp"
         android:layout_marginTop="8dp"
-        android:background="@android:color/black"
+        android:background="@android:color/holo_red_light"
         android:text="Home"
         android:textColor="@android:color/white"
         android:textSize="13sp"
@@ -66,6 +53,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/RL2"
         app:layout_constraintVertical_bias="0.68" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="174dp"
+        android:layout_height="188dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/Home"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.319"
+        app:srcCompat="@drawable/o" />
 
 
 </android.support.constraint.ConstraintLayout>

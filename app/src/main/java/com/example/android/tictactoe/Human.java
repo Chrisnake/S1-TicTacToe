@@ -122,6 +122,7 @@ public class Human extends AppCompatActivity
             public void onClick(View view) //This method will occur when it is clicked.
             {
                 B1.setText(""); B2.setText(""); B3.setText(""); B4.setText(""); B5.setText(""); B6.setText(""); B7.setText(""); B8.setText(""); B9.setText("");
+                resetBoard();
             }
         });
     }
@@ -143,26 +144,28 @@ public class Human extends AppCompatActivity
 
     protected void Move(Button b, int position)
     {
-        if (turnCheck()) //If turnCheck returns true, then the last value was a 1, thus it was an X.
+        if(!TTTSolution.repeatCheck(Board, position)) //IF repeatCheck is false when they click a position then that means there is no repeats
         {
-            b.setText("X");
-            moveList.add(0);//If it was 1, then we add 0 to the array list, because the next move should be from the nought.
-            int X = getN(position);
-            System.out.println("Board Position: " + X);
-            updateArray(X, 1);
-            checkWin(Board);
-            checkDraw(); //If there is a draw (=true)
+            if (turnCheck()) //If turnCheck returns true, then the last value was a 1, thus it was an X.
+            {
+                b.setText("X");
+                moveList.add(0);//If it was 1, then we add 0 to the array list, because the next move should be from the nought.
+                int X = getN(position);
+                System.out.println("Board Position: " + X);
+                TTTSolution.updateArray(Board, X, 1);
+                checkWin(Board);
+                checkDraw(); //If there is a draw (=true)
 
-        }
-        else //If false, then the last value was a 0, thus it was a O.
-        {
-            b.setText("O");
-            moveList.add(1);
-            int X = getN(position);
-            System.out.println("Board Position: " + X);
-            updateArray(X, 0);
-            checkWin(Board);
-            checkDraw(); //If there is a draw (=true)
+            } else //If false, then the last value was a 0, thus it was a O.
+            {
+                b.setText("O");
+                moveList.add(1);
+                int X = getN(position);
+                System.out.println("Board Position: " + X);
+                TTTSolution.updateArray(Board, X, 0);
+                checkWin(Board);
+                checkDraw(); //If there is a draw (=true)
+            }
         }
     }
 
@@ -171,18 +174,12 @@ public class Human extends AppCompatActivity
         return (n);
     }
 
-    protected void resetArray(int Board[]) //Reset the game
+    protected void resetBoard()
     {
-        for(int reset = 0; reset < 9; reset++)
-        {
-            Board[reset] = 7;
-        }
-    }
-
-    protected static void updateArray(int x, int XorO) //Updates global array to change the 7 into a 1 or a 0.
-    {
-        Board[x] = XorO;
-        System.out.print("Board state updated! : " + Arrays.toString(Board));
+        Intent playIntent = new Intent(Human.this, Human.class); //Points it to the Human finish
+        TTTSolution.resetArray(Board);
+        System.out.println("Reset Clicked");
+        startActivity(playIntent);
     }
 
     protected boolean checkDraw() //Checks the global array to see if there are no 7's available.
@@ -207,13 +204,12 @@ public class Human extends AppCompatActivity
             check = true;
             Intent playIntent = new Intent(Human.this, Human.class); //Points it to the Human finish
             startActivity(playIntent);
-            resetArray(Board);
-            System.out.println("It's a draw!!!");
+            TTTSolution.resetArray(Board);
+            System.out.println("It's a draw");
         }
 
         return(check);
     }
-
     protected boolean checkWin(int Board[]) //Consistently checks the global array after it has been altered to see if there is a win
     {
         boolean check = false;
@@ -221,7 +217,7 @@ public class Human extends AppCompatActivity
         {
             Intent playIntent = new Intent(Human.this, humanFinish.class); //Points it to the Human finish
             startActivity(playIntent);
-            resetArray(Board);
+            TTTSolution.resetArray(Board);
             check = true;
         }
 
@@ -229,7 +225,7 @@ public class Human extends AppCompatActivity
         {
             Intent playIntent = new Intent(Human.this, humanFinish.class); //Points it to the Human finish
             startActivity(playIntent);
-            resetArray(Board);
+            TTTSolution.resetArray(Board);
             check = true;
         }
 
@@ -237,7 +233,7 @@ public class Human extends AppCompatActivity
         {
             Intent playIntent = new Intent(Human.this, humanFinish.class); //Points it to the Human finish
             startActivity(playIntent);
-            resetArray(Board);
+            TTTSolution.resetArray(Board);
             check = true;
         }
 
@@ -245,7 +241,7 @@ public class Human extends AppCompatActivity
         {
             Intent playIntent = new Intent(Human.this, humanFinish.class); //Points it to the Human finish
             startActivity(playIntent);
-            resetArray(Board);
+            TTTSolution.resetArray(Board);
             check = true;
         }
 
@@ -253,7 +249,7 @@ public class Human extends AppCompatActivity
         {
             Intent playIntent = new Intent(Human.this, humanFinish.class); //Points it to the Human finish
             startActivity(playIntent);
-            resetArray(Board);
+            TTTSolution.resetArray(Board);
             check = true;
         }
 
@@ -261,7 +257,7 @@ public class Human extends AppCompatActivity
         {
             Intent playIntent = new Intent(Human.this, humanFinish.class); //Points it to the Human finish
             startActivity(playIntent);
-            resetArray(Board);
+            TTTSolution.resetArray(Board);
             check = true;
         }
 
@@ -269,7 +265,7 @@ public class Human extends AppCompatActivity
         {
             Intent playIntent = new Intent(Human.this, humanFinish.class); //Points it to the Human finish
             startActivity(playIntent);
-            resetArray(Board);
+            TTTSolution.resetArray(Board);
             check = true;
         }
 
@@ -277,7 +273,7 @@ public class Human extends AppCompatActivity
         {
             Intent playIntent = new Intent(Human.this, humanFinish.class); //Points it to the Human finish
             startActivity(playIntent);
-            resetArray(Board);
+            TTTSolution.resetArray(Board);
             check = true;
         }
 
@@ -285,7 +281,7 @@ public class Human extends AppCompatActivity
         {
             Intent playIntent = new Intent(Human.this, humanFinish.class); //Points it to the Human finish
             startActivity(playIntent);
-            resetArray(Board);
+            TTTSolution.resetArray(Board);
             check = true;
         }
 
@@ -293,7 +289,7 @@ public class Human extends AppCompatActivity
         {
             Intent playIntent = new Intent(Human.this, humanFinish.class); //Points it to the Human finish
             startActivity(playIntent);
-            resetArray(Board);
+            TTTSolution.resetArray(Board);
             check = true;
         }
 
@@ -301,7 +297,7 @@ public class Human extends AppCompatActivity
         {
             Intent playIntent = new Intent(Human.this, humanFinish.class); //Points it to the Human finish
             startActivity(playIntent);
-            resetArray(Board);
+            TTTSolution.resetArray(Board);
             check = true;
         }
 
@@ -309,7 +305,7 @@ public class Human extends AppCompatActivity
         {
             Intent playIntent = new Intent(Human.this, humanFinish.class); //Points it to the Human finish
             startActivity(playIntent);
-            resetArray(Board);
+            TTTSolution.resetArray(Board);
             check = true;
         }
 
@@ -317,7 +313,7 @@ public class Human extends AppCompatActivity
         {
             Intent playIntent = new Intent(Human.this, humanFinish.class); //Points it to the Human finish
             startActivity(playIntent);
-            resetArray(Board);
+            TTTSolution.resetArray(Board);
             check = true;
         }
 
@@ -325,7 +321,7 @@ public class Human extends AppCompatActivity
         {
             Intent playIntent = new Intent(Human.this, humanFinish.class); //Points it to the Human finish
             startActivity(playIntent);
-            resetArray(Board);
+            TTTSolution.resetArray(Board);
             check = true;
         }
 
@@ -333,7 +329,7 @@ public class Human extends AppCompatActivity
         {
             Intent playIntent = new Intent(Human.this, humanFinish.class); //Points it to the Human finish
             startActivity(playIntent);
-            resetArray(Board);
+            TTTSolution.resetArray(Board);
             check = true;
         }
 
@@ -341,7 +337,7 @@ public class Human extends AppCompatActivity
         {
             Intent playIntent = new Intent(Human.this, humanFinish.class); //Points it to the Human finish
             startActivity(playIntent);
-            resetArray(Board);
+            TTTSolution.resetArray(Board);
             check = true;
         }
 

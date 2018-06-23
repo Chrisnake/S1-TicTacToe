@@ -12,6 +12,7 @@ import android.widget.Button;
 
 public class MainMenu extends AppCompatActivity
 {
+    MediaPlayer background;
     public static final String DEBUGTAG = "CHRISVILLEGAS";
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -20,7 +21,7 @@ public class MainMenu extends AppCompatActivity
         setContentView(R.layout.activity_main_menu);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        MediaPlayer background = MediaPlayer.create(MainMenu.this,R.raw.backgroundmusic);
+        background = MediaPlayer.create(MainMenu.this,R.raw.backgroundmusic);
         background.setLooping(true);
         background.start();
 
