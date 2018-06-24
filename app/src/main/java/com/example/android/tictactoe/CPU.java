@@ -231,39 +231,53 @@ public class CPU extends AppCompatActivity {
         ArrayList<TTTSolution> Fitnesses = new ArrayList<TTTSolution>();
         ArrayList<Integer> CPUMoves = possibleMoves();
 
-        for(int reviewFitness: CPUMoves)
+        for(int reviewFitness: CPUMoves) //For loop iterates through all the CPUMoves that are available (The possible moves)
         {
-            simulatedBoard = CBoard.clone();
-            if (!turnCheck()) //If turnCheck = false, then the last value was a 1. Now it is 0's turn.
+            simulatedBoard = CBoard.clone(); //Create a clone of the current board state and call it the simulated board.
+            if (turnCheck()) //If turnCheck = false, then the last value was a O. Now it is X's turn (CPU).
             {
-                simulatedBoard[reviewFitness] = 0;  //FIRSTLY - CHECKS IF THERE IS A LOSS BY SEEING THE NEXT OPPONENTS MOVE
-                if (TTTSolution.CPUcheckLose(simulatedBoard, 0))
+                simulatedBoard[reviewFitness] = 1;
+                if(TTTSolution.CPUCheckWin(simulatedBoard, 1) == 1)
                 {
-                    TTTSolution hey = new TTTSolution(5,reviewFitness);
+                    TTTSolution hey = new TTTSolution(20,reviewFitness);
+                    Fitnesses.add(hey);
+                    System.out.println("Position " + reviewFitness + " has a win");
+                }
+                simulatedBoard[reviewFitness] = 0;  //Check the future move by seeing if there X can lose next turn if O can win.
+                if (TTTSolution.CPUcheckLose(simulatedBoard, 1))
+                {
+                    TTTSolution hey = new TTTSolution(5,reviewFitness); //If X can lose the turn after then give it a fitness of 5.
                     Fitnesses.add(hey);
                     System.out.println("Position " + reviewFitness + " has a Loss");
                 }
-                else
+                else //If there is no win in any future moves from the opponent(O), then check if there is a win.
                 {
                     simulatedBoard[reviewFitness] = 1;
-                    if (TTTSolution.CPUCheckWin(simulatedBoard, 0) == 1) //Then check to see if there is a win on the "simulated board"
+                    if (TTTSolution.CPUCheckWin(simulatedBoard, 1) == 1) //Then check to see if there is a win on the "simulated board" by X.
                     {
-                        //IF THE LAST MOVE WAS BY A 0, THEN CHECK TO SEE IF ANY 1'S CAN WIN
-                        TTTSolution hey = new TTTSolution(10,reviewFitness);
+                        TTTSolution hey = new TTTSolution(10,reviewFitness); //If X can win then give it the highest fitness.
                         Fitnesses.add(hey);
                         System.out.println("Position " + reviewFitness + " has a X win!");
                     }
                     else
                     {
-                        TTTSolution hey = new TTTSolution(0,reviewFitness);
+                        TTTSolution hey = new TTTSolution(0,reviewFitness); //If X cannot win then give it 0 fitness.
                         Fitnesses.add(hey);
                         System.out.println("Position " + reviewFitness + " does not have a win!");
                     }
                 }
             }
-            else if (turnCheck()) //If the last move was made by a 1, then it is 0's turn
+            else if (!turnCheck()) //If turnCheck = true, then the last value was X, now it is O CPUs turn.
             {
-                simulatedBoard[reviewFitness] = 1;  //FIRSTLY - CHECKS IF THERE IS A LOSS BY SEEING THE NEXT OPPONENTS MOVE
+                simulatedBoard[reviewFitness] = 0;
+                if(TTTSolution.CPUCheckWin(simulatedBoard, 0) == 0)
+                {
+                    TTTSolution hey = new TTTSolution(20,reviewFitness);
+                    Fitnesses.add(hey);
+                    System.out.println("Position " + reviewFitness + " has a win");
+                }
+
+                simulatedBoard[reviewFitness] = 1;  //Check the future move by seeing if there O can lose next turn if X can win.
                 if (TTTSolution.CPUcheckLose(simulatedBoard, 1))
                 {
                     TTTSolution hey = new TTTSolution(5,reviewFitness);
@@ -273,12 +287,11 @@ public class CPU extends AppCompatActivity {
                 else
                 {
                     simulatedBoard[reviewFitness] = 0;
-                    if (TTTSolution.CPUCheckWin(simulatedBoard, 1) == 0) //Then check to see if there is a win on the "simulated board"
+                    if (TTTSolution.CPUCheckWin(simulatedBoard, 1) == 1) //Then check to see if there is a win on the "simulated board"
                     {
-                        //IF THE LAST MOVE WAS BY A 0, THEN CHECK TO SEE IF ANY 1'S CAN WIN
                         TTTSolution hey = new TTTSolution(10,reviewFitness);
                         Fitnesses.add(hey);
-                        System.out.println("Position " + reviewFitness + " has a X win!");
+                        System.out.println("Position " + reviewFitness + " has a O win!");
                     }
                     else
                     {
@@ -370,11 +383,11 @@ public class CPU extends AppCompatActivity {
         int check =  CPUmoveList.get(CPUmoveList.size() - 1);
         if (check == 0) //If the final move was made by a nought (O).
         {
-            return(false);
+            return(false); //False means that it is X's turn.
         }
         else
         {
-            return(true);
+            return(true); //True means it is O's turn
         }
     }
 

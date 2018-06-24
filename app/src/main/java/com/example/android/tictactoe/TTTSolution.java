@@ -53,37 +53,37 @@ public class TTTSolution extends AppCompatActivity
         System.out.print("Board state updated! : " + Arrays.toString(Board));
     }
 
-    public static int CPUCheckWin(int CPUBoard[], int x) //Consistently checks the global array after it has been altered to see if there is a win
+    public static int CPUCheckWin(int CPUBoard[], int whosTurn) //Consistently checks the global array after it has been altered to see if there is a win
     {
         int Win = -1;
-        if(x == 0) //If the last move was made by an 0, then it is X's turn.
-        {
-            if(XLogic(CPUBoard)) //Check if X can win
-            {
-                Win = 1;
-            }
-        }
-        else if(x == 1)
+        if(whosTurn == 0) //If the last move was made by an 0, then it is X's turn.
         {
             if(OLogic(CPUBoard)) //Check if O can win
             {
                 Win = 0;
             }
         }
+        else if(whosTurn == 1)
+        {
+            if(XLogic(CPUBoard)) //Check if X can win
+            {
+                Win = 1;
+            }
+        }
         return Win;
     }
 
-    public static boolean CPUcheckLose(int CPUBoard[], int x) //This method checks to see if there is a loss on any position on the board.
+    public static boolean CPUcheckLose(int CPUBoard[], int whosTurn) //This method checks to see if there is a loss on any position on the board.
     {
         boolean check = false;
-        if(x == 1) //If the last turn was made by an X, then it is O's go. Therefore check if X can win next round, thus O loses.
+        if(whosTurn == 1) //If the last turn was made by an X, then it is O's go. Therefore check if X can win next round, thus O loses.
         {
             if (XLogic(CPUBoard)) //iF Xlogic is true, then that means that X can win next turn
             {
                 check = true;
             }
         }
-        else if (x == 0) //If the last move was a O, then it is X's go, check if O can win.
+        else if (whosTurn == 0) //If the last move was a O, then it is X's go, check if O can win.
         {
             if (OLogic(CPUBoard))
             {
