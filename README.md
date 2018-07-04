@@ -1,4 +1,6 @@
-H1 Summer 2018 Project 1: Tic Tac Toe H1
+![tictactoe cover](https://user-images.githubusercontent.com/32743122/42295608-178bc602-7fe4-11e8-9793-c3eb94bbc698.png)
+
+# Summer 2018 Project 1: Tic Tac Toe 
 
 For my first project I have re-created the classic Tic Tac Toe game on Android Studio. The game involves two playable modes 
   1. Playing against another user (Pass and play)
